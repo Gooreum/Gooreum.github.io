@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetCycle 초대</title>
+  <style>
+    :root { --bg:#FFF9F3; --card:#FFFFFF; --ink:#4A3F3A; --ink2:#8A7D74; --primary:#FF9E8C; --primaryShadow:#E8826F; --line:#EBDFD3; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+      background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; padding:24px; }
+    .card { background:var(--card); border:1.5px solid var(--line); border-radius:26px; max-width:360px; width:100%;
+      padding:36px 28px; text-align:center; box-shadow:0 8px 28px rgba(90,74,66,.08); }
+    .paw { font-size:46px; }
+    h1 { font-size:20px; margin:14px 0 6px; font-weight:800; }
+    p { color:var(--ink2); font-size:14px; line-height:1.55; margin:0 0 22px; }
+    .btn { display:block; width:100%; padding:15px; border-radius:18px; border:none; cursor:pointer;
+      font-size:15px; font-weight:800; text-decoration:none; }
+    .open { background:var(--primary); color:#fff; border-bottom:4px solid var(--primaryShadow); }
+    .install { margin-top:10px; background:var(--card); color:var(--ink); border:1.5px solid var(--line); }
+    .code { margin-top:18px; font-size:12px; color:var(--ink2); }
+    .code b { color:var(--ink); letter-spacing:.5px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="paw">🐾</div>
+    <h1>가족으로 초대받았어요</h1>
+    <p>PetCycle 앱에서 초대를 열어<br />가족에 합류 신청을 보내세요.</p>
+    <a id="open" class="btn open" href="#">앱에서 열기</a>
+    <a id="install" class="btn install" href="https://apps.apple.com/app/id6783009758">앱 설치하기</a>
+    <div class="code" id="codeLine"></div>
+  </div>
+  <script>
+    // 경로 /j/<code> 에서 코드 추출 → 커스텀 스킴으로 앱 열기 시도 (Universal Link 미동작 폴백)
+    (function () {
+      var m = window.location.pathname.match(/\/j\/([^\/?#]+)/);
+      var code = m ? decodeURIComponent(m[1]) : '';
+      var openBtn = document.getElementById('open');
+      var codeLine = document.getElementById('codeLine');
+      if (code) {
+        openBtn.href = 'petcycle://j/' + encodeURIComponent(code);
+        codeLine.innerHTML = '초대 코드 <b>' + code + '</b>';
+        // 설치된 기기에서 자동으로 앱 열기 시도
+        setTimeout(function () { window.location.href = openBtn.href; }, 350);
+      } else {
+        openBtn.href = 'petcycle://';
+      }
+    })();
+  </script>
+</body>
+</html>
