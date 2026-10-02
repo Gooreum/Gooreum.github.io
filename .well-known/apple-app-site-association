@@ -3,8 +3,12 @@
     "apps": [],
     "details": [
       {
-        "appIDs": ["LHW4ZX343L.com.gooreum.petcycle", "LHW4ZX343L.com.petcycletest.app", "LHW4ZX343L.petcaretest"],
-        "paths": ["/j/*"]
+        "appIDs": [
+          "LHW4ZX343L.com.gooreum.petcycle"
+        ],
+        "paths": [
+          "/j/*"
+        ]
       }
     ]
   }
