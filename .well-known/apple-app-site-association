@@ -9,6 +9,15 @@
         "paths": [
           "/j/*"
         ]
+      },
+      {
+        "appIDs": [
+          "LHW4ZX343L.com.englisup.englishup"
+        ],
+        "paths": [
+          "/readsharp/knowledge/",
+          "/readsharp/knowledge/*"
+        ]
       }
     ]
   }

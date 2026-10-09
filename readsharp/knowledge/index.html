@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReadSharp 지식 노트</title>
+  <style>
+    :root { --paper:#FBF0DC; --ink:#1C1A17; --ink2:#6E675C; --line:#D9CDB5; }
+    @media (prefers-color-scheme: dark) { :root { --paper:#1E1B17; --ink:#F3E7D0; --ink2:#A89C86; --line:#3A352D; } }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+      background:var(--paper); color:var(--ink); padding:24px;
+      font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; }
+    .sheet { max-width:360px; width:100%; border:1.5px solid var(--ink); padding:36px 28px; text-align:center; }
+    .mark { font-family:"New York",Georgia,serif; font-size:40px; font-weight:700; letter-spacing:-1px; }
+    h1 { font-size:19px; margin:14px 0 6px; font-weight:800; }
+    p { color:var(--ink2); font-size:14px; line-height:1.6; margin:0 0 22px; }
+    .btn { display:block; width:100%; padding:15px; border:1.5px solid var(--ink); font-size:15px; font-weight:800; text-decoration:none; }
+    .open { background:var(--ink); color:var(--paper); }
+    .install { margin-top:10px; background:transparent; color:var(--ink); }
+    .hint { margin-top:18px; font-size:12px; color:var(--ink2); }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="mark">R#</div>
+    <h1>ReadSharp 지식 노트</h1>
+    <p>이 링크는 ReadSharp 앱의 지식 노트로 연결됩니다.<br />앱이 바로 열리지 않으면 아래 버튼을 눌러 주세요.</p>
+    <a id="open" class="btn open" href="#">앱에서 열기</a>
+    <a class="btn install" href="https://apps.apple.com/kr/app/readsharp/id6759560557">App Store에서 받기</a>
+    <div class="hint" id="hint"></div>
+  </div>
+  <script>
+    // ?id=<historyItemId> → 커스텀 스킴으로 앱 열기 (유니버설 링크가 가로채지 못한 경우의 폴백)
+    (function () {
+      var id = new URLSearchParams(window.location.search).get('id') || '';
+      var open = document.getElementById('open');
+      if (id) {
+        open.href = 'readsharp://knowledge?id=' + encodeURIComponent(id) + '&source=web';
+      } else {
+        open.href = 'readsharp://';
+        document.getElementById('hint').textContent = '노트 ID가 없는 링크입니다. 앱 홈을 엽니다.';
+      }
+    })();
+  </script>
+</body>
+</html>
